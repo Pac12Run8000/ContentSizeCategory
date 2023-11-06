@@ -6,16 +6,22 @@
 //
 
 import SwiftUI
-
+// Change the Display Text Size > Larger Text > Enabled
 struct ContentView: View {
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Hello, World!")
+                .padding()
+                .background(backgroundForDynamicTypeSize())
+                .foregroundColor(.white)
+                .cornerRadius(10)
         }
-        .padding()
+    }
+    
+    private func backgroundForDynamicTypeSize() -> Color {
+        let contentSizeCategory = UIContentSizeCategory(dynamicTypeSize)
+        return contentSizeCategory >= .accessibilityMedium ? Color.red : Color.blue
     }
 }
 
